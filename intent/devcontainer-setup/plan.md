@@ -7,7 +7,7 @@
 ## Steps
 
 1. `post-create.sh`: run `bundle install` after the existing `package.json` block, so gems are present when the container opens. Without it the first `tools/run.sh` fails on missing gems.
-2. `devcontainer.json`: add `forwardPorts: [4000]` so the Jekyll server is reachable from the host browser. Leave `tools/run.sh` and `.vscode/tasks.json` unchanged (see decisions below).
+2. `devcontainer.json`: add `forwardPorts: [4000]` so the Jekyll server is reachable from the host browser. Leave `tools/run.sh` and `.vscode/tasks.json` unchanged (see Deviations).
 
 ## Files
 
@@ -29,4 +29,4 @@
 Pattern: all-at-once. These files affect only local and Codespaces container builds, not the deployed site or CI. Rollback is `git revert` of the two commits. Rollback trigger: the container fails to build or `tools/run.sh` is unreachable from the host. No holding metric applies.
 
 ## Deviations
-<!-- none yet; record any mid-build scope change here, with the reason -->
+- Port binding differs from the accepted intent, which proposed `-H 0.0.0.0` in the VS Code task. The plan leaves `tasks.json` and `tools/run.sh` unchanged and relies on `forwardPorts` alone. Reason: `.vscode/tasks.json` is shared with host use, so binding `0.0.0.0` there would expose the dev server to the LAN, and VS Code port forwarding is expected to reach a server bound to `127.0.0.1` inside the container. This is unverified until the manual VS Code Done-when item is run. If it fails, add a container-only task that binds `0.0.0.0` and record that here.
