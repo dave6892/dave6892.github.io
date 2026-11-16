@@ -6,6 +6,9 @@ if [ -f package.json ]; then
   npm run build
 fi
 
+# Install gems so tools/run.sh and tools/test.sh work on first open
+bundle install
+
 # Install dependencies for shfmt extension
 curl -sS https://webi.sh/shfmt | sh &>/dev/null
 
