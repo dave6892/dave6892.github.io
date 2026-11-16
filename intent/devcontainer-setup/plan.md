@@ -26,7 +26,7 @@
 - [ ] Manual, in VS Code: `Dev Containers: Rebuild Without Cache`, run the "Run Jekyll Server" task, and `http://localhost:4000` on the host renders the `hello-world` post. `docker run` can't exercise VS Code port forwarding, so this one is yours to run.
 - [x] `bash -n tools/serve-container.sh` exits 0, and the file is executable.
 - [x] `docker run -d -v "$PWD":/work -w /work -p 127.0.0.1:4010:4000 mcr.microsoft.com/devcontainers/jekyll:2-bullseye bash tools/serve-container.sh`, then `curl -fsS http://127.0.0.1:4010/posts/hello-world/` on the host exits 0 and returns the `Hello, world` page (checked).
-- [ ] `git diff --name-only main...HEAD` lists only the three files above plus `intent/devcontainer-setup/`.
+- [x] `git diff --name-only main...HEAD` lists only the three files above plus `intent/devcontainer-setup/`.
 
 ## Release
 
